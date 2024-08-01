@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option go_package = "genproto/content_service";
+
+message Content {
+    string contentID = 1;
+    string title = 2;
+    string createdAt = 3;
+}
+
+message CreateContentReq {
+    string title = 1;
+}
+
+message GetByIdReq {
+    string id = 1;
+}
+
+message GetListReq {
+    int32 limit = 1;
+    int32 page = 2;
+}
+
+message GetListResp {
+    repeated Content contents = 1;
+}
+
+service ContentService {
+    rpc CreateContent (CreateContentReq) returns (Content) {};
+    rpc GetContentsList (GetListReq) returns (GetListResp) {};
+    rpc GetContentById (GetByIdReq) returns (Content) {};
+}
